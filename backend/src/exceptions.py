@@ -7,7 +7,9 @@ from src.settings import settings
 
 
 class NotAllowedFileTypeException(HTTPException):
-    def __init__(self, current_file_type: str, allowed_file_types: List[str] = settings.ALLOWED_FILE_TYPES) -> None:
+    def __init__(
+        self, current_file_type: str, allowed_file_types: List[str] = settings.ALLOWED_FILE_TYPES
+    ) -> None:
         super().__init__(
             detail={
                 "status": "Not allowed file type.",
@@ -19,7 +21,11 @@ class NotAllowedFileTypeException(HTTPException):
 
 
 class TooLongVideoFileException(HTTPException):
-    def __init__(self, current_video_duration: float, allowed_max_video_duration: float = settings.MAX_ALLOWED_FILE_LENGTH) -> None:
+    def __init__(
+        self,
+        current_video_duration: float,
+        allowed_max_video_duration: float = settings.MAX_ALLOWED_FILE_LENGTH,
+    ) -> None:
         super().__init__(
             detail={
                 "status": "Too long video file.",
@@ -28,6 +34,7 @@ class TooLongVideoFileException(HTTPException):
             },
             status_code=HTTPStatus.BAD_REQUEST,
         )
+
 
 class UnauthorizedException(HTTPException):
     def __init__(self) -> None:
