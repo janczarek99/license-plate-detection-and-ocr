@@ -1,1 +1,1 @@
-# license-plate-detection-and-ocr
+# License plate detection and OCR
