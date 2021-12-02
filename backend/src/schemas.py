@@ -8,4 +8,4 @@ class LicensePlatesResponseSchema(BaseModel):
 
 
 class DetectionsResponseSchema(BaseModel):
-    data: int
+    data: List[str]

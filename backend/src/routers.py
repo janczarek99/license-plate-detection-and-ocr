@@ -1,14 +1,13 @@
-import tempfile
 from http import HTTPStatus
 
 from fastapi import APIRouter, Depends, File, UploadFile
 
-from src.exceptions import NotAllowedFileTypeException, TooLongVideoFileException
-from src.schemas import DetectionsResponseSchema, LicensePlatesResponseSchema
-from src.settings import settings
-from src.utils import check_authorization, get_frames_every_n_ms, get_video_file_duration
+from .clients import AzureClient, get_azure_client
+from .schemas import DetectionsResponseSchema, LicensePlatesResponseSchema
+from .settings import settings
+from .utils import check_if_video_pass_conditions
 
-router = APIRouter(dependencies=[Depends(check_authorization)])
+router = APIRouter()
 
 
 @router.get(
@@ -27,20 +26,12 @@ async def get_available_license_plates():
     response_model=DetectionsResponseSchema,
     status_code=HTTPStatus.OK,
 )
-async def get_license_plate_detected_in_video(uploaded_file: UploadFile = File(...)):
-    if (current_file_type := uploaded_file.content_type.lower()) not in settings.ALLOWED_FILE_TYPES:
-        raise NotAllowedFileTypeException(current_file_type)
+async def get_license_plate_detected_in_video(
+    uploaded_file: UploadFile = File(...), azure_client: AzureClient = Depends(get_azure_client)
+):
+    video_file = check_if_video_pass_conditions(uploaded_file)
+    detected_license_plates = await azure_client.detect_license_plates_in_video(
+        video_file=video_file
+    )
 
-    video_file = tempfile.NamedTemporaryFile()
-    video_file.write(uploaded_file.file.read())
-
-    if (
-        current_video_duration := get_video_file_duration(video_file)
-    ) > settings.MAX_ALLOWED_FILE_LENGTH:
-        video_file.close()
-        raise TooLongVideoFileException(current_video_duration)
-
-    frames = get_frames_every_n_ms(video_file=video_file, n_ms=1000)
-    video_file.close()
-
-    return {"data": len(frames)}
+    return {"data": detected_license_plates}
