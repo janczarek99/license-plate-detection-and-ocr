@@ -1,10 +1,24 @@
 import os
-from typing import List
+from typing import Any, Dict, List, Optional
 
-from pydantic import BaseSettings
+from pydantic import BaseSettings, validator
 
 
 class Settings(BaseSettings):
+    CORS_ALLOW_ORIGINS: List[str] = ["https://plate-detection-front.azurewebsites.net"]
+    CORS_ALLOW_METHODS: List[str] = ["GET", "POST"]
+    CORS_SETTINGS: Optional[Dict] = None
+
+    @validator("CORS_SETTINGS", pre=True)
+    def assemble_cors_settings(cls, v: Optional[Dict], values: Dict[str, Any]) -> Any:
+        if isinstance(v, dict):
+            return v
+
+        return {
+            "allow_origins": values.get("CORS_ALLOW_ORIGINS"),
+            "allow_methods": values.get("CORS_ALLOW_METHODS"),
+        }
+
     AVAILABLE_LICENSE_PLATES: List[str] = ["WF80350", "SBI91126", "PZ825UA", "WN2845M", "WPI1694G"]
 
     ALLOWED_FILE_TYPES: List[str] = ["video/mp4"]
