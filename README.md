@@ -52,7 +52,7 @@ Link do strony - <https://plate-detection-front.azurewebsites.net/>
 
 ## Demo rozwiązania
 
-[![demo](resources/images/thumbnail.png)](https://www.youtube.com/watch?v=aSBm_2dLl_I)
+[![demo](resources/images/thumbnail.png)](https://youtu.be/SB-F2TOchRw)
 
 ## Reprodukcja rozwiązania
 
