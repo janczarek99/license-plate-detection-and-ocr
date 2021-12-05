@@ -5,7 +5,7 @@ from pydantic import BaseSettings, validator
 
 
 class Settings(BaseSettings):
-    CORS_ALLOW_ORIGINS: List[str] = ["https://plate-detection-front.azurewebsites.net"]
+    CORS_ALLOW_ORIGINS: List[str] = ["https://plate-detection-front.azurewebsites.net", "https://license-plates-api-proxy.westeurope.cloudapp.azure.com"]
     CORS_ALLOW_METHODS: List[str] = ["GET", "POST"]
     CORS_SETTINGS: Optional[Dict] = None
 
