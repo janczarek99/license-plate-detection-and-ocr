@@ -60,16 +60,16 @@ Poniżej znajdują się przyciski, które służą do szybkiego wdrożenia serwi
 
 ### App Service
 
-[![wdróż na azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjanczarek99%2Fsign-language-classification%2Fmain%2Fresources%2Fazure-deploy-templates%2Fcontainers-template.json)
+[![wdróż na azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjanczarek99%2Flicense-plate-detection-and-ocr%2Fmain%2Fresources%2Fazure-deploy-templates%2Fapp-service-template.json)
 
 ### Computer Vision
 
-[![wdróż na azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjanczarek99%2Fsign-language-classification%2Fmain%2Fresources%2Fazure-deploy-templates%2Fcontainers-template.json)
+[![wdróż na azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjanczarek99%2Flicense-plate-detection-and-ocr%2Fmain%2Fresources%2Fazure-deploy-templates%2Fcomputer-vision-template.json)
 
 ### Container Services + Virtual Machines
 
-[![wdróż na azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjanczarek99%2Fsign-language-classification%2Fmain%2Fresources%2Fazure-deploy-templates%2Fcontainers-template.json)
+[![wdróż na azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjanczarek99%2Flicense-plate-detection-and-ocr%2Fmain%2Fresources%2Fazure-deploy-templates%2Fvm-and-docker-instances-template.json)
 
 ### Custom Vision
 
-[![wdróż na azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjanczarek99%2Fsign-language-classification%2Fmain%2Fresources%2Fazure-deploy-templates%2Fcustom-vision-template.json)
+[![wdróż na azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjanczarek99%2Flicense-plate-detection-and-ocr%2Fmain%2Fresources%2Fazure-deploy-templates%2Fcustom-vision-template.json)
