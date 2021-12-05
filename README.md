@@ -17,10 +17,10 @@ Celem projektu było stworzenie serwisu do rozpoznawania tablic rejestracyjnych 
 * Python (FastAPI)
 * Docker
 * Azure App Service
+* Azure Computer Vision (OCR)
 * Azure Container Services:
   * Container Instances
   * Container Registry
-* Azure Computer Vision (OCR)
 * Azure Custom Vision (Object Detection)
 * Azure Virtual Machines
 
@@ -40,7 +40,7 @@ Następnie otagowano na nich rejony, w których znajdują się tablice rejestrac
 
 Otrzymany w wyniku model został opublikowany w formie API, dostępnego za podaniem klucza. Drugi serwis (Computer Vision) jest gotowym rozwiązaniem, oferującym optyczne rozpoznawanie znaków, więc wystarczyło stworzyć zasób i upublicznić go w formie API (również dostępnego za podaniem klucza).
 
-W celu umożliwienia interakcji z oboma serwisami powstało API napisane w Python'ie przy użyciu framework'a FastAPI. Aplikacja ta otrzymuje filmik, a następnie dzieli go na klatki (2 klatki na 1 sekundę filmu) i wysyła je pojedynczo do serwisu Custom Vision. Każda z odesłanych predykcji poddawana jest procesowi selekcji, z którego wybierane są tylko te rejony z największym prawdopodobieństwem bycia tablicą rejestracyjną (>= 90%). Następnie aplikacja wycina ze zdjęcia wybrane rejony i każdy z nich wysyła do serwisu Computer Vision. Tam obraz jest interpretowany i zwracany jest znaleziony numer rejestracyjny. Po przerobieniu wszystkich obrazów, aplikacja wysyła odpowiedź w formie listy znalezionych tablic. Obecne rozwiązanie nie wspiera dodawania zaufanych tablic rejestracyjnych, są one na sztywno zapisane w pliku konfiguracyjnym [settings.py](backend/src/settings.py). API to w formie kontenera zostało dodane do serwisu Container Registry i tam zbudowane. Następnie przy pomocy serwisu Container Instances aplikacja została wdrożona.
+W celu umożliwienia interakcji z oboma serwisami powstało API napisane w Python'ie przy użyciu framework'a FastAPI. Aplikacja ta otrzymuje filmik, a następnie dzieli go na klatki (10 klatek na 1 sekundę filmu) i wysyła je pojedynczo do serwisu Custom Vision. Każda z odesłanych predykcji poddawana jest procesowi selekcji, z którego wybierane są tylko te rejony z największym prawdopodobieństwem bycia tablicą rejestracyjną (>= 75%). Następnie aplikacja wycina ze zdjęcia wybrane rejony i każdy z nich wysyła do serwisu Computer Vision. Tam obraz jest interpretowany i zwracany jest znaleziony numer rejestracyjny. Po przerobieniu wszystkich obrazów, aplikacja wysyła odpowiedź w formie listy znalezionych tablic. Obecne rozwiązanie nie wspiera dodawania zaufanych tablic rejestracyjnych, są one na sztywno zapisane w pliku konfiguracyjnym [settings.py](backend/src/settings.py). API to w formie kontenera zostało dodane do serwisu Container Registry i tam zbudowane. Następnie przy pomocy serwisu Container Instances aplikacja została wdrożona.
 
 W celu zwiększenia bezpieczeństwa w komunikacji z backend'em, zdecydowano na dodanie pośrednika w formie serwera NGINX działającego na maszynie wirtualnej Ubuntu, jako reverse proxy. Dzięki temu można wysyłać dane kanałem szyfrowanym.
 
@@ -62,18 +62,14 @@ Poniżej znajdują się przyciski, które służą do szybkiego wdrożenia serwi
 
 [![wdróż na azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjanczarek99%2Fsign-language-classification%2Fmain%2Fresources%2Fazure-deploy-templates%2Fcontainers-template.json)
 
-### Container Services
+### Computer Vision
+
+[![wdróż na azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjanczarek99%2Fsign-language-classification%2Fmain%2Fresources%2Fazure-deploy-templates%2Fcontainers-template.json)
+
+### Container Services + Virtual Machines
 
 [![wdróż na azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjanczarek99%2Fsign-language-classification%2Fmain%2Fresources%2Fazure-deploy-templates%2Fcontainers-template.json)
 
 ### Custom Vision
 
 [![wdróż na azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjanczarek99%2Fsign-language-classification%2Fmain%2Fresources%2Fazure-deploy-templates%2Fcustom-vision-template.json)
-
-### Computer Vision
-
-[![wdróż na azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjanczarek99%2Fsign-language-classification%2Fmain%2Fresources%2Fazure-deploy-templates%2Fcontainers-template.json)
-
-### Virtual Machines
-
-[![wdróż na azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjanczarek99%2Fsign-language-classification%2Fmain%2Fresources%2Fazure-deploy-templates%2Fcontainers-template.json)
