@@ -1,7 +1,9 @@
 import asyncio
+import logging
 import tempfile
 from http import HTTPStatus
 from typing import Dict, List, Optional
+from math import ceil
 
 import aiohttp
 import numpy as np
@@ -31,14 +33,25 @@ class AzureClient:
     ) -> List[str]:
         frames = get_frames_every_n_ms(video_file)
 
-        tasks = []
+        all_results = []
 
-        for frame in frames:
-            tasks.append(asyncio.ensure_future(self._find_license_plates_and_ocr(frame)))
+        for i in range(ceil(len(frames)/10)): # Every 10 frames we will sleep 1s to prevent blocking
+            tasks = []
 
-        results = await asyncio.gather(*tasks)
+            start_idx = i*10
+            stop_idx = start_idx + 10
 
-        license_plates = [result.upper() for result in results if result is not None]
+            for frame in frames[start_idx:stop_idx]:
+                tasks.append(asyncio.ensure_future(self._find_license_plates_and_ocr(frame)))
+
+            results = await asyncio.gather(*tasks)
+
+            all_results.extend(results)
+
+            await asyncio.sleep(1)
+
+
+        license_plates = [result.upper() for result in all_results if result is not None]
 
         video_file.close()
 
@@ -81,8 +94,11 @@ class AzureClient:
                     if response.status == HTTPStatus.OK:
                         json_response = await response.json()
                         return json_response.get("predictions", [])
+                    else:
+                        json_response = await response.json()
+                        logging.debug(json_response)
         except Exception:
-            pass
+            logging.debug("Custom Vision exception")
 
         return []
 
@@ -100,8 +116,11 @@ class AzureClient:
                     if response.status == HTTPStatus.OK:
                         json_response = await response.json()
                         return json_response.get("regions", [])
+                    else:
+                        json_response = await response.json()
+                        logging.debug(json_response)
         except Exception:
-            pass
+            logging.debug("OCR exception")
 
         return []
 
