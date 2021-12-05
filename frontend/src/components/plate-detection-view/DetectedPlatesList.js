@@ -7,7 +7,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
 export function DetectedPlatesList(props) {
-  console.log(props.list);
+
+  console.log(props.accessList)
+
+  const text = {
+    color: "#006600"
+};
 
   return (
     <div>
@@ -26,7 +31,7 @@ export function DetectedPlatesList(props) {
       >
         Detected plates:
       </Typography>
-      {props.isFetching ? (
+      {props.isFetching ? 
         <Box
           sx={{
             position: "absolute",
@@ -36,25 +41,26 @@ export function DetectedPlatesList(props) {
         >
           <CircularProgress size="50px" />
         </Box>
-      ) : (
-        <List
-          sx={{
-            width: "100%",
-            maxWidth: 360,
-            bgcolor: "background.paper",
-            position: "relative",
-            overflow: "auto",
-            maxHeight: 300,
-            "& ul": { padding: 0 },
-          }}
-        >
-          {props.list.map((item, index) => (
-            <ListItem key={`allowed-plate-${index}`}>
-              <ListItemText primary={item} />
-            </ListItem>
-          ))}
-        </List>
-      )}
+       : 
+          props.list && <List
+            sx={{
+              width: "100%",
+              maxWidth: 360,
+              bgcolor: "background.paper",
+              position: "relative",
+              overflow: "auto",
+              maxHeight: 300,
+              "& ul": { padding: 0 },
+            }}
+          >
+            {props.list.map((item, index) => (
+              <ListItem key={`allowed-plate-${index}`}>
+              {props.accessList.includes(item) ? (<ListItemText primaryTypographyProps={{ style: text }} primary={item} />) : (<ListItemText primary={item} />)}
+                
+              </ListItem>
+            ))}
+          </List>
+      }
     </div>
   );
 }

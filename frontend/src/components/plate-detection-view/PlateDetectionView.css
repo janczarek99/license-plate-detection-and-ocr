@@ -1,40 +1,49 @@
 .center-screen {
-    display: flex;
-    /* justify-content: center;
-    align-items: center; */
-    margin-left: 100px;
-    margin-top: 50px;
-    text-align: left;
-    min-height: 100vh;
-  }
-  .uploaded-video{
-    position: absolute;
-    margin-top: 100px;
-    margin-left: 250px;
-  }
-  .upload-button{
-    position: absolute;
-    margin-top: 32px;
-    margin-left: 250px;
-  }
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+  margin-left: 100px;
+  margin-top: 50px;
+  text-align: left;
+  min-height: 100vh;
+}
+.uploaded-video{
+  position: absolute;
+  margin-top: 100px;
+  margin-left: 250px;
+}
+.upload-button{
+  position: absolute;
+  margin-top: 32px;
+  margin-left: 250px;
+}
 
-  .send-button{
-    position: absolute;
-    margin-top: 32px;
-    margin-left: 400px;
-  }
-   .title{
-    margin-top: 50px;
-    margin-left: 100px;
-    width: fit-content;
-    color:#1976d2;
-    outline-style: solid;
-    outline-width: 2px;
-    padding-left: 5px;
-    padding-right: 5px;
-   }
-   .detected-plates{
-    position: absolute;
-    margin-top: 0px;
-    margin-left: 800px;
-  }
+.send-button{
+  position: absolute;
+  margin-top: 32px;
+  margin-left: 400px;
+}
+ .title{
+  margin-top: 50px;
+  margin-left: 100px;
+  width: fit-content;
+  color:#1976d2;
+  outline-style: solid;
+  outline-width: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+ }
+ .detected-plates{
+  position: absolute;
+  margin-top: 0px;
+  margin-left: 800px;
+}
+.access-plates{
+  position: absolute;
+  margin-top: 0px;
+  margin-left: 1000px;
+}
+.alert{
+  position: absolute;
+  margin-top: 500px;
+}

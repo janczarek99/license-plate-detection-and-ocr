@@ -7,8 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
 export function AllowedPlatesList(props) {
-  console.log(props.list);
-
+  
   return (
     <div>
       <Typography
@@ -38,7 +37,7 @@ export function AllowedPlatesList(props) {
             "& ul": { padding: 0 },
           }}
         >
-          {props.list.map((item, index) => (
+          {props.list.data.map((item, index) => (
             <ListItem key={`allowed-plate-${index}`}>
               <ListItemText primary={item} />
             </ListItem>
