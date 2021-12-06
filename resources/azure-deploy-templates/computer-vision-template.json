@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "accounts_computervisionlicenseplates_name": {
+            "defaultValue": "computervisionlicenseplates",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.CognitiveServices/accounts",
+            "apiVersion": "2021-04-30",
+            "name": "[parameters('accounts_computervisionlicenseplates_name')]",
+            "location": "westeurope",
+            "sku": {
+                "name": "S1"
+            },
+            "kind": "ComputerVision",
+            "identity": {
+                "type": "None",
+                "userAssignedIdentities": {}
+            },
+            "properties": {
+                "customSubDomainName": "[parameters('accounts_computervisionlicenseplates_name')]",
+                "networkAcls": {
+                    "defaultAction": "Allow",
+                    "virtualNetworkRules": [],
+                    "ipRules": []
+                },
+                "publicNetworkAccess": "Enabled"
+            }
+        }
+    ]
+}

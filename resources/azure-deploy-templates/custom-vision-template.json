@@ -2,12 +2,12 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "accounts_customvisionpslclassification_name": {
-            "defaultValue": "customvisionpslclassification",
+        "accounts_customvisionlicenseplates_name": {
+            "defaultValue": "customvisionlicenseplates",
             "type": "String"
         },
-        "accounts_customvisionpslclassification_Prediction_name": {
-            "defaultValue": "customvisionpslclassification-Prediction",
+        "accounts_customvisionlicenseplates_Prediction_name": {
+            "defaultValue": "customvisionlicenseplates-Prediction",
             "type": "String"
         }
     },
@@ -16,14 +16,14 @@
         {
             "type": "Microsoft.CognitiveServices/accounts",
             "apiVersion": "2021-04-30",
-            "name": "[parameters('accounts_customvisionpslclassification_name')]",
-            "location": "northeurope",
+            "name": "[parameters('accounts_customvisionlicenseplates_name')]",
+            "location": "westeurope",
             "sku": {
-                "name": "F0"
+                "name": "S0"
             },
             "kind": "CustomVision.Training",
             "properties": {
-                "customSubDomainName": "[parameters('accounts_customvisionpslclassification_name')]",
+                "customSubDomainName": "[parameters('accounts_customvisionlicenseplates_name')]",
                 "networkAcls": {
                     "defaultAction": "Allow",
                     "virtualNetworkRules": [],
@@ -35,14 +35,14 @@
         {
             "type": "Microsoft.CognitiveServices/accounts",
             "apiVersion": "2021-04-30",
-            "name": "[parameters('accounts_customvisionpslclassification_Prediction_name')]",
-            "location": "northeurope",
+            "name": "[parameters('accounts_customvisionlicenseplates_Prediction_name')]",
+            "location": "westeurope",
             "sku": {
-                "name": "F0"
+                "name": "S0"
             },
             "kind": "CustomVision.Prediction",
             "properties": {
-                "customSubDomainName": "customvisionpslclassification-prediction",
+                "customSubDomainName": "customvisionlicenseplates-prediction",
                 "networkAcls": {
                     "defaultAction": "Allow",
                     "virtualNetworkRules": [],
